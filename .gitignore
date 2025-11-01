@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Python
 __pycache__/
 *.py[cod]
@@ -21,4 +22,17 @@ staticfiles/
 .env
 
 # VS Code
+=======
+# Python virtual environments
+venv/
+venv_backup/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Django + VS Code extras
+db.sqlite3
+*.log
+>>>>>>> fa04ff0 (Add .gitignore)
 .vscode/
