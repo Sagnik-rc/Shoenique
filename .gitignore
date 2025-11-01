@@ -29,6 +29,31 @@ staticfiles/
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+env/
+
+# Django
+*.log
+db.sqlite3
+media/
+staticfiles/
+*.pot
+*.pyc
+*.mo
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
 *$py.class
 
 # Virtual environment
