@@ -1,0 +1,10 @@
+from django.shortcuts import render, get_object_or_404
+from .models import Product
+from django.shortcuts import render
+
+def home(request):
+    return render(request, 'shop/home.html')
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    return render(request, 'shop/product_detail.html', {'product': product})
