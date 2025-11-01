@@ -1,26 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shoenique | Home</title>
-    <style>
-        body { font-family: Arial; background: #fafafa; }
-        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; text-align: center; background: white; }
-        img { max-width: 100%; height: auto; }
-    </style>
-</head>
-<body>
-    <h1>🥿 Welcome to Shoenique</h1>
-    <div>
-        {% for product in products %}
-            <div class="product">
-                {% if product.image %}
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}">
-                {% endif %}
-                <h3>{{ product.name }}</h3>
-                <p>₹{{ product.price }}</p>
-                <p>{{ product.description }}</p>
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero py-5 text-center">
+        <h1 class="display-4">Step Into Style</h1>
+        <p class="lead">Discover the latest sneakers, boots, and casuals – all in one place.</p>
+        <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products py-5">
+        <h2 class="section-title text-center mb-4">Featured Products</h2>
+        <div class="row g-4">
+            {% for product in products %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card product-card h-100">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title h5">{{ product.name }}</h3>
+                        <p class="price">₹{{ product.price }}</p>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary add-cart" data-id="{{ product.id }}">Add to Cart</button>
+                            <a href="{% url 'shop:product_detail' product.id %}" class="btn btn-outline-secondary">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-    </div>
-</body>
-</html>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>No products available right now.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}
