@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Python
 __pycache__/
 *.py[cod]
@@ -24,15 +25,51 @@ staticfiles/
 # VS Code
 =======
 # Python virtual environments
+=======
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+>>>>>>> f13dd0a (Add .gitignore to ignore virtual environment and cache files)
 venv/
 venv_backup/
+.env/
+*.env
 
-# Python cache
-__pycache__/
-*.pyc
-
-# Django + VS Code extras
-db.sqlite3
+# Django stuff:
 *.log
+<<<<<<< HEAD
 >>>>>>> fa04ff0 (Add .gitignore)
+=======
+db.sqlite3
+media/
+staticfiles/
+
+# IDEs & editors
+>>>>>>> f13dd0a (Add .gitignore to ignore virtual environment and cache files)
 .vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Byte-compiled / optimized files
+*.pyo
+*.pyd
+*.pdb
+
+# PyInstaller
+*.spec
+
+# Unit test / coverage reports
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# OS files
+.DS_Store
+Thumbs.db
