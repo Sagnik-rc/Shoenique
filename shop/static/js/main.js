@@ -2,16 +2,14 @@
 
 // Navbar background change on scroll
 window.addEventListener("scroll", () => {
-  const nav = document.querySelector("nav");
+  const nav = document.querySelector(".custom-navbar");
   if (window.scrollY > 50) {
-    nav.style.background = "rgba(0, 0, 0, 0.85)";
-    nav.style.backdropFilter = "blur(10px)";
-    nav.style.boxShadow = "0 2px 15px rgba(0,0,0,0.3)";
+    nav.classList.add("scrolled");
   } else {
-    nav.style.background = "rgba(0, 0, 0, 0.6)";
-    nav.style.boxShadow = "none";
+    nav.classList.remove("scrolled");
   }
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.custom-navbar');
