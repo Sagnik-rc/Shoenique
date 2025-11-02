@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'shop.apps.ShopConfig',  # Add this line
+    'shop',  # Add this line
 ]
 
 MIDDLEWARE = [

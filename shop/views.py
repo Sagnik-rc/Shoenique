@@ -3,6 +3,7 @@ from .models import Product
 
 def home(request):
     products = Product.objects.all()
+    print("Product count:", products.count())  # debug line
     return render(request, 'shop/home.html', {'products': products})
 
 def product_detail(request, product_id):
