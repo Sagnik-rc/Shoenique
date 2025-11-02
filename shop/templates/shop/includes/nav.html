@@ -1,15 +1,37 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'shop:home' %}">Shoenique</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary nav-link" href="{% url 'shop:cart' %}">Cart</a>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-white" href="{% url 'shop:home' %}">
+      Shoenique
+    </a>
+
+    <button
+      class="navbar-toggler bg-light"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav gap-4">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'shop:home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Contact</a>
+        </li>
+      </ul>
     </div>
+
+    <a href="{% url 'shop:cart' %}" class="btn btn-outline-light cart-btn">
+      🛒 Cart
+    </a>
+  </div>
 </nav>
