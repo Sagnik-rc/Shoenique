@@ -4,32 +4,33 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <div class="col-md-6 mx-auto p-4 border rounded bg-light shadow-sm">
-    <h2 class="text-center mb-4">Create Account</h2>
+<section class="auth-section d-flex justify-content-center align-items-center">
+  <div class="auth-card p-5">
+    <h2 class="text-center mb-4 fw-bold">Create Your Account ✨</h2>
     <form method="POST">
       {% csrf_token %}
       <div class="mb-3">
-        <label>Username</label>
-        <input type="text" name="username" class="form-control" required>
+        <label class="form-label">Username</label>
+        <input type="text" name="username" class="form-control glass-input" required>
       </div>
       <div class="mb-3">
-        <label>Email</label>
-        <input type="email" name="email" class="form-control" required>
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control glass-input" required>
       </div>
       <div class="mb-3">
-        <label>Password</label>
-        <input type="password" name="password" class="form-control" required>
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control glass-input" required>
       </div>
       <div class="mb-3">
-        <label>Confirm Password</label>
-        <input type="password" name="confirm" class="form-control" required>
+        <label class="form-label">Confirm Password</label>
+        <input type="password" name="confirm" class="form-control glass-input" required>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Register</button>
+      <button type="submit" class="btn btn-login w-100 mt-3">Register</button>
     </form>
     <p class="text-center mt-3">
-      Already have an account? <a href="{% url 'accounts:login' %}">Login</a>
+      Already have an account? 
+      <a href="{% url 'accounts:login' %}" class="register-link">Login</a>
     </p>
   </div>
-</div>
+</section>
 {% endblock %}

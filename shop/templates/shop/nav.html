@@ -10,7 +10,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse align-items-center" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'shop:home' %}">Home</a>
@@ -33,20 +33,17 @@
         {% endif %}
       </ul>
 
-      <ul class="navbar-nav ms-auto align-items-center">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item me-2">
           <a class="btn btn-outline-light px-3" href="{% url 'shop:cart' %}">
-            🛒 Cart
+            <i class="fa-solid fa-bag-shopping"></i>
           </a>
         </li>
 
         {% if user.is_authenticated %}
-        <li class="nav-item me-2">
-          <span class="text-light fw-semibold">Welcome {{ user.username }}!</span>
-        </li>
         <li class="nav-item">
           <a href="{% url 'accounts:logout' %}" class="btn btn-danger px-3">
-            Logout
+            <i class="fa-solid fa-right-from-bracket"></i>
           </a>
         </li>
         {% else %}
