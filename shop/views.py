@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .models import Product
+from .models import Product, Newsletter
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 # 🏠 Home Page — Displays all products
 def home(request):
@@ -21,6 +23,13 @@ def cart(request):
 @login_required(login_url='accounts:login')
 def checkout(request):
     return render(request, 'shop/checkout.html')
+
+
+def about_us(request):
+    return render(request, 'shop/about.html')
+
+def contact_us(request):
+    return render(request, 'shop/contact.html')
 
 # 🔐 User Login 
 def register(request):
@@ -63,3 +72,17 @@ def logout_view(request):
     logout(request)
     messages.success(request, "You have been logged out.")
     return redirect('shop:login')
+
+def newsletter_subscribe(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+
+        if Newsletter.objects.filter(email=email).exists():
+            messages.warning(request, "You are already subscribed!")
+        else:
+            Newsletter.objects.create(email=email)
+            messages.success(request, "Subscribed successfully!")
+
+        return redirect(request.META.get("HTTP_REFERER", "/"))
+
+    return redirect("/")
