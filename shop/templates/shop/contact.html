@@ -1,0 +1,43 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<section class="contact-section container py-5">
+  <h2 class="text-center mb-4 fw-bold">Contact Us</h2>
+
+  <p class="text-center text-light mb-5">
+    Have questions? We're here to help. Reach out anytime!
+  </p>
+
+  <div class="row">
+    <div class="col-md-6 text-light">
+      <h4>📍 Address</h4>
+      <p>Santiniketan, West Bengal, India</p>
+
+      <h4>📞 Phone</h4>
+      <p>+91 98765 43210</p>
+
+      <h4>📧 Email</h4>
+      <p>support@shoenique.com</p>
+    </div>
+
+    <div class="col-md-6">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+          <input type="text" class="form-control" placeholder="Your Name" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" placeholder="Your Email" required>
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+        </div>
+        <button class="btn btn-warning w-100">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
