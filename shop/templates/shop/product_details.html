@@ -1,0 +1,50 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+
+<section class="product-section container py-5">
+
+    <div class="row align-items-center justify-content-center">
+
+        <!-- LEFT: PRODUCT IMAGE -->
+        <div class="col-lg-6 mb-4">
+            <div class="product-image glass-box p-3">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-4 shadow-lg">
+            </div>
+        </div>
+
+        <!-- RIGHT: PRODUCT DETAILS -->
+        <div class="col-lg-6">
+            <div class="product-details glass-box p-4">
+
+                <h1 class="product-title mb-3">{{ product.name }}</h1>
+
+                {% if product.brand %}
+                <p class="brand">Brand: <span>{{ product.brand }}</span></p>
+                {% endif %}
+
+                <div class="price-box mb-3">
+                    <h2 class="price">₹{{ product.price }}</h2>
+                    {% if product.old_price %}
+                        <span class="old-price">₹{{ product.old_price }}</span>
+                    {% endif %}
+                </div>
+
+                <p class="description mb-4">{{ product.description }}</p>
+
+                <div class="d-flex gap-3">
+                    <a href="#" class="btn-add-cart">Add to Cart</a>
+                    <a href="#" class="btn-buy-now">Buy Now</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
