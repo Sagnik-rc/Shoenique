@@ -35,9 +35,27 @@
 
                 <p class="description mb-4">{{ product.description }}</p>
 
+                <!-- ✅ Updated Add to Cart with dataset attributes -->
                 <div class="d-flex gap-3">
-                    <a href="#" class="btn-add-cart">Add to Cart</a>
-                    <a href="#" class="btn-buy-now">Buy Now</a>
+
+                    <button class="btn-add-cart"
+                        data-id="{{ product.id }}"
+                        data-name="{{ product.name }}"
+                        data-price="{{ product.price }}"
+                        data-image="{{ product.image.url }}">
+                        Add to Cart
+                    </button>
+
+                    <a href="#" 
+                        class="btn-buy-now"
+                        data-id="{{ product.id }}"
+                        data-name="{{ product.name }}"
+                        data-price="{{ product.price }}"
+                        data-image="{{ product.image.url }}">
+                            Buy Now
+                    </a>
+
+
                 </div>
 
             </div>

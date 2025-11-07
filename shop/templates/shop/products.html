@@ -1,0 +1,55 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}All Products{% endblock %}
+
+{% block content %}
+
+<section class="products-page container py-5">
+
+    <h2 class="fw-bold text-center text-light mb-4">All Products</h2>
+
+    <div class="row g-4">
+
+        {% for product in products %}
+        <div class="col-md-4 col-lg-3">
+            <div class="card product-card h-100 fade-in">
+
+                <div class="card-img-wrapper">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <div class="placeholder-img bg-light d-flex align-items-center justify-content-center">
+                            <span class="text-muted">No image</span>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-body d-flex flex-column">
+                    <h3 class="card-title h5 mb-2">{{ product.name }}</h3>
+                    <p class="price mb-2">₹{{ product.price }}</p>
+
+                    <div class="mt-auto d-grid gap-2">
+                        <button class="btn btn-primary add-cart"
+                                data-id="{{ product.id }}"
+                                data-name="{{ product.name }}"
+                                data-price="{{ product.price }}"
+                                data-image="{{ product.image.url }}">
+                            Add to Cart
+                        </button>
+
+                        <a href="{% url 'shop:product_detail' product.id %}"
+                           class="btn btn-outline-secondary">
+                           View Details
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

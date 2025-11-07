@@ -7,13 +7,21 @@ from django.contrib.auth.models import User
 
 # 🏠 Home Page — Displays all products
 def home(request):
-    products = Product.objects.all()
+    products = Product.objects.all() [:4]
     return render(request, 'shop/home.html', {'products': products})
 
 # 🔍 Product Details Page
 def product_detail(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     return render(request, 'shop/product_details.html', {'product': product})
+
+def all_products(request):
+    products = Product.objects.all()
+    return render(request, 'shop/products.html', {'products': products})
+
+def products_page(request):
+    products = Product.objects.all()
+    return render(request, 'shop/products.html', {'products': products})
 
 # 🛒 Cart Page
 def cart(request):
