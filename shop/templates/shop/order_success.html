@@ -1,0 +1,40 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Order Success{% endblock %}
+
+{% block content %}
+<section class="container py-5" style="padding-top:7rem;">
+  <div class="glass-box p-5 rounded-4 shadow-lg mx-auto" style="max-width:720px;">
+    <div class="text-center mb-4">
+      <h2 class="text-light fw-bold">Thank you for your order!</h2>
+      <p class="text-light mb-1">Your order number is</p>
+      <h4 class="text-warning">#{{ order.id }}</h4>
+      <p class="text-light">We’ve sent a confirmation to <b>{{ order.email }}</b>.</p>
+    </div>
+
+    <hr class="border-secondary">
+
+    <h5 class="text-light mb-3">Order Summary</h5>
+    {% for item in order.items.all %}
+      <div class="d-flex justify-content-between text-light mb-2">
+        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+        <span>₹{{ item.price|floatformat:2 }}</span>
+      </div>
+    {% endfor %}
+    <div class="d-flex justify-content-between mt-3 text-light fw-bold">
+      <span>Total</span>
+      <span>₹{{ order.total_price|floatformat:2 }}</span>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'shop:home' %}" class="btn btn-outline-light px-4">Continue Shopping</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  localStorage.removeItem("cart");
+  localStorage.removeItem("buy_now_item");
+</script>
+{% endblock %}

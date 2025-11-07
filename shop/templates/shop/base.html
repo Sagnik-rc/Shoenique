@@ -6,32 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shoenique | {% block title %}{% endblock %}</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/product.css' %}">
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
     <body>
-
-    <!-- ✅ Include Navbar -->
     {% include 'shop/nav.html' %}
-
-
-
-    <!-- ✅ Page Content -->
     <main>
         {% block content %}{% endblock %}
     </main>
-
-    <!-- ✅ Footer -->
     <footer class="bg-dark text-light py-2 mt-1">
-
-    <!-- ✅ Newsletter -->
         <div class="newsletter-box text-center mb-4">
             <h5 class="text-light">Subscribe to our Newsletter</h5>
             <form method="POST" action="{% url 'shop:subscribe' %}"
@@ -42,15 +27,11 @@
                 <button type="submit" class="newsletter-btn">Subscribe</button>
             </form>
         </div>
-
-        <!-- ✅ Copyright -->
         <div class="container text-center">
             <p>&copy; {% now "Y" %} Shoenique. All rights reserved.</p>
         </div>
         
     </footer>
-
-    <!-- ✅ JS Files -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

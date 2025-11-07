@@ -1,18 +1,9 @@
-/* ================= SHOENIQUE MAIN.JS ================= */
-
-/* --------------------------------------------------
-   ✅ NAVBAR SCROLL EFFECT
--------------------------------------------------- */
 window.addEventListener("scroll", () => {
     const nav = document.querySelector(".custom-navbar");
     if (!nav) return;
 
     nav.classList.toggle("scrolled", window.scrollY > 80);
 });
-
-/* --------------------------------------------------
-   ✅ SMOOTH SCROLLING FOR # LINKS
--------------------------------------------------- */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -26,9 +17,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-/* --------------------------------------------------
-   ✅ HERO SECTION ANIMATION
--------------------------------------------------- */
 window.addEventListener("load", () => {
     const heroContent = document.querySelector(".hero-content");
     if (heroContent) {
@@ -41,10 +29,6 @@ window.addEventListener("load", () => {
         }, 200);
     }
 });
-
-/* --------------------------------------------------
-   ✅ SCROLL FADE-IN ELEMENTS
--------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", function () {
     const observer = new IntersectionObserver(
         entries => {
@@ -58,9 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 });
 
-/* ==================================================
-        ✅ CART MODULE (BEST PRACTICE)
-================================================== */
 const Cart = {
     get() {
         return JSON.parse(localStorage.getItem("cart")) || [];
@@ -124,7 +105,7 @@ const Cart = {
         let emptyBox = document.getElementById("empty-cart");
         let grandTotal = document.getElementById("grand-total");
 
-        if (!cartTable) return; // Not on cart page
+        if (!cartTable) return;
 
         let cart = Cart.get();
         cartTable.innerHTML = "";
@@ -161,20 +142,8 @@ const Cart = {
         grandTotal.innerText = Cart.getTotal();
     }
 };
-
-/* --------------------------------------------------
-   ✅ Initialize Cart Counter Everywhere
--------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", Cart.updateCounter);
-
-/* --------------------------------------------------
-   ✅ Render Cart Page (if cart.html)
--------------------------------------------------- */
 document.addEventListener("DOMContentLoaded", Cart.render);
-
-/* ==================================================
-        ✅ ADD TO CART HANDLER
-================================================== */
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("add-cart")) {
         let btn = e.target;
@@ -188,10 +157,6 @@ document.addEventListener("click", function (e) {
         });
     }
 });
-
-/* ==================================================
-        ✅ BUY NOW HANDLER
-================================================== */
 document.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-buy-now")) {
 

@@ -4,140 +4,111 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
-<section class="checkout-section container py-5">
+<section class="checkout-section container py-5" style="padding-top: 7rem;">
+  <h2 class="fw-bold text-center text-light mb-5">Checkout</h2>
 
-    <h2 class="fw-bold text-center text-light mb-5">Checkout</h2>
+  <div class="row g-4 justify-content-center">
 
-    <div class="row g-4 justify-content-center">
+    <div class="col-lg-5">
+      <div class="glass-box p-4 rounded-4 shadow-lg">
+        <h4 class="text-light mb-3">Order Summary</h4>
 
-        <!-- ✅ ORDER SUMMARY -->
-        <div class="col-lg-5">
-            <div class="glass-box p-4 rounded-4 shadow-lg">
-                <h4 class="text-light mb-3">Order Summary</h4>
+        <div id="checkout-items"></div>
 
-                <div id="checkout-items"></div>
-
-                <div class="d-flex justify-content-between mt-3 text-light fw-bold">
-                    <span>Grand Total:</span>
-                    <span>₹<span id="checkout-total">0</span></span>
-                </div>
-            </div>
+        <div class="d-flex justify-content-between mt-3 text-light fw-bold">
+          <span>Grand Total:</span>
+          <span>₹<span id="checkout-total">0</span></span>
         </div>
-
-        <!-- ✅ USER DETAILS FORM -->
-        <div class="col-lg-5">
-            <div class="glass-box p-4 rounded-4 shadow-lg">
-
-                <h4 class="text-light mb-3">Shipping Details</h4>
-
-                <form id="checkout-form">
-                    <div class="mb-3">
-                        <label class="text-light">Full Name</label>
-                        <input type="text" class="form-control glass-input" id="c-name"
-                               value="{{ user.username }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="text-light">Email</label>
-                        <input type="email" class="form-control glass-input"
-                               value="{{ user.email }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="text-light">Phone Number</label>
-                        <input type="tel" class="form-control glass-input" id="c-phone"
-                               placeholder="Enter phone number" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="text-light">Address</label>
-                        <textarea class="form-control glass-input" rows="3"
-                                  placeholder="Complete shipping address" required></textarea>
-                    </div>
-
-                    <h5 class="text-light mt-4">Payment Method</h5>
-                    <div class="d-flex gap-3 mt-2">
-                        <label class="text-light">
-                            <input type="radio" name="payment" value="cod" checked> Cash on Delivery
-                        </label>
-                        <label class="text-light">
-                            <input type="radio" name="payment" value="online"> Online Payment
-                        </label>
-                    </div>
-
-                    <button type="submit"
-                            class="btn btn-warning w-100 mt-4 fw-bold py-2">
-                        Place Order
-                    </button>
-                </form>
-
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="col-lg-5">
+      <div class="glass-box p-4 rounded-4 shadow-lg">
+        <h4 class="text-light mb-3">Shipping Details</h4>
+
+        <form id="checkout-form" method="POST" action="{% url 'shop:place_order' %}">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label class="text-light">Full Name</label>
+            <input type="text" class="form-control glass-input" name="name"
+                   value="{{ user.username }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-light">Email</label>
+            <input type="email" class="form-control glass-input" name="email"
+                   value="{{ user.email }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-light">Phone Number</label>
+            <input type="tel" class="form-control glass-input" name="phone"
+                   placeholder="Enter phone number" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="text-light">Address</label>
+            <textarea class="form-control glass-input" rows="3" name="address"
+                      placeholder="Complete shipping address" required></textarea>
+          </div>
+
+          <h5 class="text-light mt-4">Payment Method</h5>
+          <div class="d-flex gap-3 mt-2">
+            <label class="text-light">
+              <input type="radio" name="payment_method" value="COD" checked>
+              Cash on Delivery
+            </label>
+            <label class="text-light">
+              <input type="radio" name="payment_method" value="ONLINE">
+              Online Payment
+            </label>
+          </div>
+          <input type="hidden" id="order-data" name="order_data">
+
+          <button type="submit" class="btn btn-warning w-100 mt-4 fw-bold py-2">
+            Place Order
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ✅ CHECKOUT JS -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    let checkoutItems = document.getElementById("checkout-items");
-    let checkoutTotal = document.getElementById("checkout-total");
+  const checkoutItems = document.getElementById("checkout-items");
+  const checkoutTotal = document.getElementById("checkout-total");
+  const orderDataInput = document.getElementById("order-data");
+  const form = document.getElementById("checkout-form");
 
-    let buyNowItem = JSON.parse(localStorage.getItem("buy_now_item"));
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const buyNowItem = JSON.parse(localStorage.getItem("buy_now_item"));
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    let finalItems = [];
-    let total = 0;
-
-    // ✅ 1️⃣ BUY NOW has priority
-    if (buyNowItem) {
-        finalItems.push(buyNowItem);
-        total = buyNowItem.price * buyNowItem.quantity;
-    } else {
-        // ✅ 2️⃣ Load full cart
-        finalItems = cart;
-        cart.forEach(item => {
-            total += item.price * item.quantity;
-        });
-    }
-
-    // ✅ Display items
-    finalItems.forEach(item => {
-        checkoutItems.innerHTML += `
-            <div class="d-flex align-items-center justify-content-between mb-3 text-light">
-                <div class="d-flex align-items-center">
-                    <img src="${item.image}" width="70" class="rounded me-3">
-                    <div>
-                        <h6 class="mb-0">${item.name}</h6>
-                        <small>Qty: ${item.quantity}</small>
-                    </div>
-                </div>
-                <h6 class="text-warning">₹${item.price * item.quantity}</h6>
-            </div>
-        `;
-    });
-
-    checkoutTotal.innerText = total;
-
-    // ✅ Handle order submit
-    document.getElementById("checkout-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        Swal.fire({
-            title: "Order Placed!",
-            text: "Thank you for shopping with Shoenique.",
-            icon: "success",
-            confirmButtonColor: "#ffb400"
-        }).then(() => {
-            // ✅ Clear cart only if not Buy Now
-            if (!buyNowItem) {
-                localStorage.removeItem("cart");
-            }
-            localStorage.removeItem("buy_now_item");
-
-            window.location.href = "/";
-        });
-    });
+  const finalItems = buyNowItem ? [buyNowItem] : cart;
+  let total = 0;
+  checkoutItems.innerHTML = "";
+  finalItems.forEach(item => {
+    const itemTotal = (item.price * item.quantity);
+    total += itemTotal;
+    checkoutItems.innerHTML += `
+      <div class="d-flex align-items-center justify-content-between mb-3 text-light">
+        <div class="d-flex align-items-center">
+          <img src="${item.image}" width="70" class="rounded me-3" alt="${item.name}">
+          <div>
+            <h6 class="mb-0">${item.name}</h6>
+            <small>Qty: ${item.quantity}</small>
+          </div>
+        </div>
+        <h6 class="text-warning">₹${itemTotal.toFixed(2)}</h6>
+      </div>
+    `;
+  });
+  checkoutTotal.textContent = total.toFixed(2);
+  form.addEventListener("submit", function () {
+    orderDataInput.value = JSON.stringify(finalItems);
+  });
 });
 </script>
-
 {% endblock %}
