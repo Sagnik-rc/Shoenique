@@ -11,7 +11,7 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return redirect("shop:home")  # Change this to your home page name
+            return redirect("shop:home")
         else:
             messages.error(request, "Invalid username or password.")
             return redirect("accounts:login")

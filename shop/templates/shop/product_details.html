@@ -8,15 +8,11 @@
 <section class="product-section container py-5">
 
     <div class="row align-items-center justify-content-center">
-
-        <!-- LEFT: PRODUCT IMAGE -->
         <div class="col-lg-6 mb-4">
             <div class="product-image glass-box p-3">
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-4 shadow-lg">
             </div>
         </div>
-
-        <!-- RIGHT: PRODUCT DETAILS -->
         <div class="col-lg-6">
             <div class="product-details glass-box p-4">
 
@@ -34,10 +30,26 @@
                 </div>
 
                 <p class="description mb-4">{{ product.description }}</p>
-
                 <div class="d-flex gap-3">
-                    <a href="#" class="btn-add-cart">Add to Cart</a>
-                    <a href="#" class="btn-buy-now">Buy Now</a>
+
+                    <button class="btn-add-cart"
+                        data-id="{{ product.id }}"
+                        data-name="{{ product.name }}"
+                        data-price="{{ product.price }}"
+                        data-image="{{ product.image.url }}">
+                        Add to Cart
+                    </button>
+
+                    <a href="#" 
+                        class="btn-buy-now"
+                        data-id="{{ product.id }}"
+                        data-name="{{ product.name }}"
+                        data-price="{{ product.price }}"
+                        data-image="{{ product.image.url }}">
+                            Buy Now
+                    </a>
+
+
                 </div>
 
             </div>

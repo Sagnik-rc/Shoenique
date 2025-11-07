@@ -18,13 +18,7 @@ SECRET_KEY = 'django-insecure-x*c_!bv^#dd)#p2!3014+7_k3x-c2bwafq_rl#1%5+x$km$70c
 
 DEBUG = True
 ALLOWED_HOSTS = []
-
-
-# ----------------------
-# Application definition
-# ----------------------
 INSTALLED_APPS = [
-    # Default Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,15 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Your apps
     'shop',
     'accounts',
 ]
-
-
-# ----------------------
-# Middleware
-# ----------------------
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -50,11 +38,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-
-# ----------------------
-# URL and Template settings
-# ----------------------
 ROOT_URLCONF = 'Shoenique.urls'
 
 TEMPLATES = [
@@ -74,42 +57,22 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Shoenique.wsgi.application'
-
-
-# ----------------------
-# Database
-# ----------------------
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
-# ----------------------
-# Password Validators
-# ----------------------
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
-
-# ----------------------
-# Internationalization
-# ----------------------
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Asia/Kolkata'
 USE_I18N = True
 USE_TZ = True
-
-
-# ----------------------
-# Static & Media Files
-# ----------------------
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'shop' / 'static']
 
@@ -117,10 +80,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# ----------------------
-# Auth Redirects (Basic Django)
-# ----------------------
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
